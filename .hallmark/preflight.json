@@ -1,0 +1,9 @@
+{
+  "scannedAt": "2026-08-14",
+  "framework": "React + Vite",
+  "fontStack": "Manrope",
+  "palette": "DOODEE brand tokens",
+  "motion": "CSS transitions",
+  "spacing": "4px scale",
+  "designSystem": "DESIGN.md"
+}
