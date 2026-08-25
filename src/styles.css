@@ -11462,7 +11462,7 @@ body:has(.results-page) {
   right: clamp(24px, 5vw, 86px);
   bottom: 8%;
   width: clamp(150px, 18vw, 270px);
-  opacity: .27;
+  opacity: .324;
   transform: rotate(-13deg);
 }
 
@@ -11476,7 +11476,7 @@ body:has(.results-page) {
   left: -6%;
   bottom: 3%;
   width: clamp(210px, 24vw, 380px);
-  opacity: .12;
+  opacity: .144;
   transform: rotate(-8deg);
 }
 
@@ -11491,7 +11491,7 @@ body:has(.results-page) {
   left: -8%;
   top: 19%;
   width: clamp(220px, 28vw, 430px);
-  opacity: .105;
+  opacity: .126;
   transform: rotate(11deg);
 }
 
@@ -11499,7 +11499,7 @@ body:has(.results-page) {
   right: -8%;
   bottom: -7%;
   width: clamp(300px, 40vw, 610px);
-  opacity: .13;
+  opacity: .156;
   transform: rotate(-9deg);
 }
 
@@ -11507,7 +11507,7 @@ body:has(.results-page) {
   left: -7%;
   bottom: -10%;
   width: clamp(240px, 29vw, 440px);
-  opacity: .14;
+  opacity: .168;
   transform: rotate(8deg);
 }
 
@@ -11520,7 +11520,7 @@ body:has(.results-page) {
   right: -9%;
   top: -5%;
   width: min(680px, 51vw);
-  opacity: .105;
+  opacity: .126;
 }
 
 @media (max-width: 720px) {
@@ -11534,10 +11534,10 @@ body:has(.results-page) {
   .treatment-preview__caustic { inset-inline: -24%; width: 148%; opacity: .09; }
   .analysis-showcase .metric-row::after { width: 88px; height: 88px; opacity: .1; }
 
-  .hero-stage > .static-luxury-art--ring { right: -48px; bottom: 9%; width: 190px; opacity: .14; }
-  .appearance-evidence > .static-luxury-art--prisms { left: -22%; width: 270px; opacity: .075; }
-  .analysis-showcase > .static-luxury-art--molecule { left: -30%; width: 300px; opacity: .065; }
-  .treatment-preview > .static-luxury-art--membrane { right: -36%; width: 420px; opacity: .075; }
-  .trust .static-luxury-art--pearls { left: -28%; width: 300px; opacity: .08; }
-  .pricing > .static-luxury-art--arcs { right: -38%; width: 470px; opacity: .065; }
+  .hero-stage > .static-luxury-art--ring { right: -48px; bottom: 9%; width: 190px; opacity: .168; }
+  .appearance-evidence > .static-luxury-art--prisms { left: -22%; width: 270px; opacity: .09; }
+  .analysis-showcase > .static-luxury-art--molecule { left: -30%; width: 300px; opacity: .078; }
+  .treatment-preview > .static-luxury-art--membrane { right: -36%; width: 420px; opacity: .09; }
+  .trust .static-luxury-art--pearls { left: -28%; width: 300px; opacity: .096; }
+  .pricing > .static-luxury-art--arcs { right: -38%; width: 470px; opacity: .078; }
 }
