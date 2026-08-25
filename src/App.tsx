@@ -994,7 +994,7 @@ const faqs = [
   ],
   [
     "Can I share my plan with a professional?",
-    "Yes. The complete plan is designed to become a practical brief for a clinic, dermatologist, stylist or other qualified professional.",
+    "Yes. Your analysis summary is designed to become a practical brief for a clinic, dermatologist, stylist or other qualified professional.",
   ],
 ] as const;
 
@@ -2165,8 +2165,8 @@ function NextSteps({ locale }: { locale: Locale }) {
           </strong>
           <p>
             {locale === "th"
-              ? "หลายจุดสามารถดูแลและพัฒนาได้โดยไม่ต้องทำหัตถการ เริ่มจากสิ่งที่เหมาะกับเป้าหมาย เวลา และความพร้อมของคุณ"
-              : "You can improve several areas without a procedure. Focus on the changes with the best balance of impact, effort, and commitment."}
+              ? "หลายจุดสามารถดูแลและพัฒนาได้โดยไม่ต้องทำหัตถการ เริ่มจากสิ่งที่เหมาะกับเป้าหมาย เวลา และการใช้ชีวิตของคุณ"
+              : "You can improve several areas without a procedure. Focus on the changes with the best balance of impact, effort and day-to-day fit."}
           </p>
         </div>
       </div>
@@ -2260,7 +2260,7 @@ function ProgressTimeline({ locale }: { locale: Locale }) {
             title: "Build the visible foundations.",
             copy: "Begin with hairstyle, skincare, grooming and everyday habits selected for your highest-impact opportunities.",
             action:
-              "Your first actions are simple, measurable and low commitment.",
+              "Your first actions are simple, measurable and easy to begin.",
           },
           {
             icon: BarChart3,
@@ -2306,7 +2306,7 @@ function ProgressTimeline({ locale }: { locale: Locale }) {
         <p>
           {locale === "th"
             ? "แนวทางของคุณปรับเปลี่ยนได้ตามผลลัพธ์ เริ่มจากสิ่งที่ทำได้ง่าย วัดผล แล้วค่อยตัดสินใจว่าควรไปต่ออย่างไร"
-            : "Your plan evolves with you. Start with the lowest-commitment changes, measure the difference, then decide what still matters."}
+            : "Your plan evolves with you. Start with the most practical changes, measure the difference, then decide what still matters."}
         </p>
       </div>
       <div className="progress-plan__body">
@@ -2373,7 +2373,7 @@ function ClinicBridge({ locale }: { locale: Locale }) {
             <span className="clinic-brand">
               {locale === "th"
                 ? "DOODEE สำหรับคลินิก"
-                : "DOODEE Clinic Pilot Program"}
+                : "DOODEE Clinic Workflow"}
             </span>
             <h2>
               {locale === "th" ? (
@@ -2399,10 +2399,10 @@ function ClinicBridge({ locale }: { locale: Locale }) {
             </p>
             <div className="clinic-pilot-actions">
               <Button href="#clinic-pilot">
-                {locale === "th" ? "ขอเดโมสำหรับคลินิก" : "Join the pilot"}
+                {locale === "th" ? "ดูการทำงานสำหรับคลินิก" : "See it in action"}
               </Button>
               <a href="#clinic-pilot">
-                {locale === "th" ? "ดูขั้นตอนการทำงาน" : "Request a demo"}{" "}
+                {locale === "th" ? "ดูขั้นตอนการทำงาน" : "Explore the workflow"}{" "}
                 <ArrowRight size={16} />
               </a>
             </div>
@@ -2493,7 +2493,7 @@ function ClinicBusinessFlow({ locale }: { locale: Locale }) {
             "/assets/clinic-benefits/focused-consultation.png",
           ],
           [
-            "A premium clinic image",
+            "A clinic experience patients remember",
             "Deliver a modern experience patients can understand and remember.",
             "/assets/clinic-benefits/premium-clinic.png",
           ],
@@ -2503,17 +2503,17 @@ function ClinicBusinessFlow({ locale }: { locale: Locale }) {
       <section id="clinic-value" className="clinic-benefits section-shell">
         <div className="clinic-business__heading">
           <span>
-            {locale === "th" ? "ผลลัพธ์สำหรับคลินิก" : "Clinic value"}
+            {locale === "th" ? "ผลลัพธ์สำหรับคลินิก" : "Clinic outcomes"}
           </span>
           <h2>
             {locale === "th"
               ? "การปรึกษาที่คนไข้เข้าใจ และแพทย์ต่อยอดได้ทันที"
-              : "Turn every consultation into a premium experience."}
+              : "Give every consultation a clearer starting point."}
           </h2>
           <p>
             {locale === "th"
               ? "ช่วยให้คุณเข้าใจ เปรียบเทียบ และพูดคุยเรื่องความงามได้ง่ายขึ้น"
-              : "Make complex aesthetic decisions easier to explain, compare and discuss."}
+              : "Make treatment directions easier to explain, compare and discuss."}
           </p>
         </div>
         <div className="clinic-benefit-grid">
@@ -2542,12 +2542,12 @@ function ClinicBusinessFlow({ locale }: { locale: Locale }) {
         </div>
         <div className="clinic-hardware__copy">
           <span>
-            {locale === "th" ? "ใช้อุปกรณ์เดิมของคลินิก" : "No new hardware"}
+            {locale === "th" ? "ใช้อุปกรณ์เดิมของคลินิก" : "Use the devices you already have"}
           </span>
           <h2>
             {locale === "th"
               ? "เพิ่มประสบการณ์ 3D โดยไม่เพิ่มเครื่องสแกน"
-              : "Start with the devices you already have."}
+              : "Add a 3D consultation layer without new equipment."}
           </h2>
           <p>
             {locale === "th"
@@ -2559,7 +2559,7 @@ function ClinicBusinessFlow({ locale }: { locale: Locale }) {
               <Check />
               {locale === "th"
                 ? "ไม่ต้องลงทุนกับเครื่องสแกนเฉพาะทาง"
-                : "No dedicated scanner required"}
+                : "Add 3D without a dedicated scanner"}
             </li>
             <li>
               <Check />
@@ -2571,7 +2571,7 @@ function ClinicBusinessFlow({ locale }: { locale: Locale }) {
               <Check />
               {locale === "th"
                 ? "ตั้งค่าทิศทางการปรึกษาให้เข้ากับคลินิก"
-                : "Use presets prepared for your clinic"}
+                : "Shape the workflow around your clinic"}
             </li>
           </ul>
         </div>
@@ -2579,24 +2579,24 @@ function ClinicBusinessFlow({ locale }: { locale: Locale }) {
 
       <section className="clinic-demo-cta section-shell" id="clinic-pilot">
         <div>
-          <span>{locale === "th" ? "เดโมสำหรับคลินิก" : "Pilot access"}</span>
+          <span>{locale === "th" ? "การทำงานสำหรับคลินิก" : "Clinic workflow"}</span>
           <h2>
             {locale === "th"
               ? "ดูว่า DOODEE เข้ากับการปรึกษาของคลินิกคุณอย่างไร"
-              : "Shape the next generation of aesthetic consultation."}
+              : "Make treatment options easier to understand."}
           </h2>
           <p>
             {locale === "th"
               ? "เราจะสาธิตตั้งแต่การถ่ายใบหน้า การสร้างโมเดล 3D ไปจนถึงการเปรียบเทียบทิศทางระหว่างปรึกษา"
-              : "Join a focused group of clinics testing a simpler 3D workflow with their existing devices."}
+              : "See how capture, 3D preparation and consultation can fit your existing workflow."}
           </p>
         </div>
         <div>
           <Button href="#clinic-pilot">
-            {locale === "th" ? "ขอเดโมสำหรับคลินิก" : "Join the pilot"}
+            {locale === "th" ? "ดูการทำงานสำหรับคลินิก" : "See it in action"}
           </Button>
           <a href="#clinics">
-            {locale === "th" ? "ดูประสบการณ์ 3D" : "Request a demo"}{" "}
+            {locale === "th" ? "ดูขั้นตอนการทำงาน" : "Explore the workflow"}{" "}
             <ArrowRight size={16} />
           </a>
         </div>

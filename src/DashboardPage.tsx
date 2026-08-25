@@ -865,7 +865,7 @@ function Overview({
               </div>
             </div>
             <button type="button" onClick={onUnlock}>
-              <LockKeyhole /> Unlock to see where you stand
+              <LockKeyhole /> See your reference position
             </button>
           </div>
         </div>
@@ -884,11 +884,11 @@ function Overview({
         </div>
         <div className="score-card-lock__preview">
           <LockKeyhole />
-          <strong>Unlock your shareable score card</strong>
+          <strong>Save your shareable analysis card</strong>
           <span>One image, ready to save or share.</span>
         </div>
         <button type="button" onClick={onUnlock}>
-          Unlock full analysis <ArrowRight />
+          Get access to the complete analysis <ArrowRight />
         </button>
       </GlassCard>
       <GlassCard className="pillar-progress-card">
@@ -906,7 +906,7 @@ function Overview({
           </p>
         </div>
         <button type="button" onClick={() => openView("analysis")}>
-          Continue analysis <ArrowRight />
+          Continue your analysis <ArrowRight />
         </button>
       </GlassCard>
     </div>
@@ -1062,12 +1062,12 @@ function MeasurementLibrary({ onUnlock }: { onUnlock: () => void }) {
   );
 
   return (
-    <section className="metric-library" aria-label="Measurement library">
+    <section className="metric-library" aria-label="Explore measurements">
       <GlassCard className="metric-library__head">
         <div>
-          <span className="eyebrow">Measurement library</span>
-          <h1>{analysisCatalog.length} analysis checks</h1>
-          <p>Every result shows what the scan can measure and what it cannot.</p>
+          <span className="eyebrow">Explore measurements</span>
+          <h1>{analysisCatalog.length} measurements mapped</h1>
+          <p>See what the scan can measure—and where a different view or scale is needed.</p>
         </div>
         <dl>
           <div>
@@ -1148,7 +1148,7 @@ function MeasurementLibrary({ onUnlock }: { onUnlock: () => void }) {
             {!filtered.length && (
               <div className="metric-catalog__empty">
                 <Search />
-                <strong>No matching measurement</strong>
+                <strong>No measurement matches this search.</strong>
                 <button
                   type="button"
                   onClick={() => {
@@ -1170,13 +1170,13 @@ function MeasurementLibrary({ onUnlock }: { onUnlock: () => void }) {
             <p>{selected.description}</p>
             <dl>
               <div>
-                <dt>Required capture</dt>
+                <dt>Capture needed</dt>
                 <dd>{selected.view}</dd>
               </div>
               <div>
-                <dt>Current result</dt>
+                <dt>Your result</dt>
                 <dd className="is-locked">
-                  <LockKeyhole /> Unlock value
+                  <LockKeyhole /> Reveal this measurement
                 </dd>
               </div>
             </dl>
@@ -1185,7 +1185,7 @@ function MeasurementLibrary({ onUnlock }: { onUnlock: () => void }) {
               <p>{selected.limitation}</p>
             </div>
             <button type="button" onClick={onUnlock}>
-              Unlock complete analysis <ArrowRight />
+              Get access to the complete analysis <ArrowRight />
             </button>
           </aside>
         </div>
@@ -1243,7 +1243,7 @@ function UnlockModal({ onClose }: { onClose: () => void }) {
             </div>
             <div className="unlock-loading__copy">
               <span className="eyebrow">DOODEE Complete</span>
-              <h2 id="unlock-title">Preparing your full analysis.</h2>
+              <h2 id="unlock-title">Preparing the complete view.</h2>
               <p>Checking all {analysisCatalog.length} facial measurements.</p>
               <div className="unlock-loading__progress"><i /></div>
             </div>
@@ -1256,23 +1256,23 @@ function UnlockModal({ onClose }: { onClose: () => void }) {
               </div>
               <div>
                 <span className="eyebrow">DOODEE Complete</span>
-                <h2 id="unlock-title">Unlock every detail.</h2>
-                <p>Full analysis, clear limits and a plan that updates with you.</p>
+                <h2 id="unlock-title">See every measured detail.</h2>
+                <p>85+ measurements, clear limits and a plan that keeps pace with your progress.</p>
               </div>
             </div>
             <div className="unlock-price">
               <strong>$19.99</strong>
               <span>/ month</span>
-              <small>Monthly membership</small>
+              <small>Monthly plan</small>
             </div>
             <ul>
               <li>
                 <Check />
-                All {analysisCatalog.length} analysis checks
+                All {analysisCatalog.length} measured factors
               </li>
               <li>
                 <Check />
-                Confidence, capture needs and limitations
+                Understand confidence, capture needs and limitations
               </li>
               <li>
                 <Check />
@@ -1280,12 +1280,12 @@ function UnlockModal({ onClose }: { onClose: () => void }) {
               </li>
               <li>
                 <Check />
-                Treatment previews and consultation report
+                Illustrative previews and a consultation-ready report
               </li>
             </ul>
-            <a href="/login">Start Complete <ArrowRight /></a>
+            <a href="/login">Get access to Complete <ArrowRight /></a>
             <button className="unlock-modal__free" type="button" onClick={onClose}>
-              Continue with free analysis
+              Continue with included analysis
             </button>
             <small>
               Educational guidance only. Results are not a diagnosis or a measure
@@ -1390,7 +1390,7 @@ function Analysis({
           </span>
         </button>
         <div>
-          <span className="eyebrow">{analysisCatalog.length} analysis checks</span>
+          <span className="eyebrow">{analysisCatalog.length} measurements mapped</span>
           <strong>
             {pillars.find((item) => item.id === pillar)?.label} analysis
           </strong>
@@ -1460,7 +1460,7 @@ function Analysis({
                 <MessageCircle /> Ask DOODEE GPT
               </button>
               <button className="ratio-unlock" type="button" onClick={onUnlock}>
-                <LockKeyhole /> Unlock 70+ ratios
+                <LockKeyhole /> Get access to 70+ ratios
               </button>
             </div>
           </header>
@@ -1533,17 +1533,17 @@ function Analysis({
         <div>
           <span className="eyebrow">Progress</span>
           <h2>1 of 4 pillars analyzed</h2>
-          <p>Complete every pillar for a more accurate full-face view.</p>
+          <p>Explore each pillar for a fuller view of your face.</p>
         </div>
         <div className="continue-analysis__actions">
           <button type="button" onClick={() => setPillar("angularity")}>
-            Start Angularity
+            Explore Angularity
           </button>
           <button type="button" onClick={() => setPillar("dimorphism")}>
-            Start Dimorphism
+            Explore Dimorphism
           </button>
           <button type="button" onClick={() => setPillar("features")}>
-            Start Features
+            Explore Features
           </button>
         </div>
       </GlassCard>
@@ -1576,7 +1576,7 @@ function Plan({
       <div className="app-page-title">
         <span className="eyebrow">Your plan</span>
         <h1>Know what to do next.</h1>
-        <p>Ordered by impact, effort, cost and commitment.</p>
+        <p>Prioritized by impact, effort and estimated value.</p>
       </div>
       <GlassCard className="potential-card potential-card--deep">
         <div>
@@ -1601,7 +1601,7 @@ function Plan({
             <b>{planActions.length}</b> actions
           </span>
           <span>
-            <b>$0–$1.5k</b> starting range
+            <b>$0–$1.5k</b> estimated investment
           </span>
           <span>
             <b>94%</b> coverage
@@ -1626,7 +1626,7 @@ function Plan({
         </div>
         <span>
           {mode === "Timeline"
-            ? "Manage and track your improvement journey"
+            ? "Track what you change and what follows"
             : mode === "Impact"
               ? "Highest expected impact first"
               : "Compared with your reference group"}
@@ -1639,7 +1639,7 @@ function Plan({
             <h2>Top actions in your plan</h2>
           </div>
           <button type="button" onClick={onUnlock}>
-            <LockKeyhole /> Unlock analysis
+            <LockKeyhole /> Get access to full analysis
           </button>
         </header>
         <div className="plan-action-list">
@@ -1676,7 +1676,7 @@ function Plan({
                   <b>{action.impact} pts</b>
                 </span>
                 <span>
-                  <small>Estimated range</small>
+                  <small>Estimated investment</small>
                   <b>{action.cost}</b>
                 </span>
                 <span>
@@ -1684,7 +1684,7 @@ function Plan({
                   <b>{action.time}</b>
                 </span>
                 <button type="button">
-                  Open details <ArrowRight />
+                  See details <ArrowRight />
                 </button>
               </div>
             </article>
@@ -1802,7 +1802,7 @@ function DoodeeGPT({ scanImage }: { scanImage: string }) {
           ...items,
           {
             role: "assistant",
-            text: "Your harmony score is 7.4/10. Eye separation and mouth width are your strongest measured areas. Chin projection has the clearest opportunity, but start with low-commitment changes before considering a procedure.",
+            text: "Your harmony score is 7.4/10. Eye separation and mouth width are your strongest measured areas. Chin projection has the clearest opportunity, but start with practical changes before considering a procedure.",
           },
         ]),
       420,
@@ -2018,7 +2018,7 @@ export default function DashboardPage() {
           <CircleUserRound />
           <span>
             <strong>My analysis</strong>
-            <small>Free plan</small>
+            <small>Included analysis</small>
           </span>
           <Settings2 />
         </div>
@@ -2027,7 +2027,7 @@ export default function DashboardPage() {
           type="button"
           onClick={() => setUnlockOpen(true)}
         >
-          <Sparkles /> Unlock full analysis
+          <Sparkles /> Get access to the complete analysis
         </button>
         <div className="sidebar-section">
           <span>History</span>
