@@ -2842,7 +2842,6 @@ function App() {
       ".price-plans article",
       ".faq-item",
       ".audience-cta article",
-      ".footer-grid > *",
     ];
     const elements = Array.from(
       document.querySelectorAll<HTMLElement>(selectors.join(",")),
