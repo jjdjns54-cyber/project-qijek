@@ -11298,7 +11298,6 @@ body:has(.results-page) {
   filter: drop-shadow(0 28px 42px rgba(42, 78, 117, .12));
   transform: rotate(7deg) translate3d(0, 0, 0);
 }
-.hero-stage > .site-header,
 .hero-stage > .hero {
   position: relative;
   z-index: 1;
@@ -11594,4 +11593,33 @@ body:has(.results-page) {
   .progress-plan > .static-luxury-art--topography { right: -48%; top: 5%; width: 520px; opacity: .48; }
   .clinic-bridge > .static-luxury-art--microfluidic { right: -54%; bottom: -5%; width: 560px; opacity: .52; }
   .faq > .static-luxury-art--specimen { left: -24%; top: 9%; width: 240px; opacity: .66; }
+}
+
+/* Viewport and persistent navigation guard */
+html,
+body,
+#root {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+.hero-stage > .site-header {
+  position: fixed;
+  top: 16px;
+  left: 50%;
+  z-index: 1000;
+  box-sizing: border-box;
+  margin: 0;
+  transform: translateX(-50%);
+}
+
+@media (max-width: 820px) {
+  .hero-stage > .site-header,
+  .hero-stage > .site-header.site-header--compact {
+    top: 12px;
+    width: calc(100vw - 24px);
+    max-width: calc(100vw - 24px);
+    margin: 0;
+  }
 }
