@@ -2640,7 +2640,7 @@ function ClinicBusinessFlow({ locale }: { locale: Locale }) {
 function App() {
   const [showIntro, setShowIntro] = useState(true);
   const [menuOpen, setMenuOpen] = useState(false);
-  const [openFaq, setOpenFaq] = useState<number | null>(0);
+  const [openFaq, setOpenFaq] = useState<number | null>(null);
   const [headerCompact, setHeaderCompact] = useState(false);
   const [locale, setLocale] = useState<Locale>(() =>
     localStorage.getItem("doodee_language") === "th" ? "th" : "en",
@@ -3160,8 +3160,6 @@ function App() {
               <article
                 className={openFaq === index ? "faq-item is-open" : "faq-item"}
                 key={question}
-                onMouseEnter={() => setOpenFaq(index)}
-                onFocus={() => setOpenFaq(index)}
               >
                 <button
                   onClick={() => setOpenFaq(openFaq === index ? null : index)}
