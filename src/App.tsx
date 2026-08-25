@@ -1863,6 +1863,14 @@ function TreatmentPreview({ locale }: { locale: Locale }) {
 
   return (
     <section className="treatment-preview section-shell" id="treatment-preview">
+      <img
+        className="treatment-preview__caustic"
+        src="/assets/science/caustic-light-v1.png"
+        alt=""
+        aria-hidden="true"
+        loading="lazy"
+        decoding="async"
+      />
       <div className="treatment-preview__intro">
         <p className="treatment-preview__eyebrow">
           {locale === "th" ? "ตัวอย่างภาพจำลอง" : "Treatment preview"}
@@ -2983,6 +2991,15 @@ function App() {
         </div>
         <ProductPreview locale={locale} />
       </section>
+
+      <div className="science-ribbon-divider" aria-hidden="true">
+        <img
+          src="/assets/science/chrome-ribbon-v1.png"
+          alt=""
+          loading="lazy"
+          decoding="async"
+        />
+      </div>
 
       <TreatmentPreview locale={locale} />
 
