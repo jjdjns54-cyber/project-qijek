@@ -11278,92 +11278,98 @@ body:has(.results-page) {
   .doodee-app *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; scroll-behavior: auto !important; transition-duration: .01ms !important; }
 }
 
-/* Generated visual cues: transparent, low-contrast, and subordinate to copy. */
-.pillar-card .pillar-art {
-  display: block;
+/* Landing-only scientific art */
+.landing-science-art,
+.evidence-detail__art {
+  pointer-events: none;
+  user-select: none;
+  object-fit: contain;
+}
+
+.hero-stage > .landing-science-art--dna {
   position: absolute;
+  z-index: 0;
+  top: 16%;
+  right: clamp(18px, 3vw, 54px);
+  width: clamp(230px, 25vw, 400px);
+  max-height: 68%;
+  opacity: .34;
+  filter: drop-shadow(0 28px 42px rgba(42, 78, 117, .12));
+  transform: rotate(7deg) translate3d(0, 0, 0);
+  animation: landingScienceFloat 11s ease-in-out infinite;
+}
+.hero-stage > .site-header,
+.hero-stage > .hero {
+  position: relative;
   z-index: 1;
-  inset: 0 0 0 auto;
-  width: 58%;
-  pointer-events: none;
-  opacity: .2;
-  background-repeat: no-repeat;
-  background-position: 100% 58%;
-  background-size: contain;
-  mix-blend-mode: multiply;
-  transform: translate3d(0, 0, 0) scale(.98);
-  transition: opacity 220ms ease, transform 280ms cubic-bezier(.16,1,.3,1);
 }
-.pillar-art--harmony,
-.pillar-art--features { background-image: url('/assets/generated/facial-mesh.png'); }
-.pillar-art--angularity { background-image: url('/assets/generated/profile-contour.png'); }
-.pillar-art--dimorphism { background-image: url('/assets/generated/capture-devices.png'); }
-.pillar-card:hover .pillar-art,
-.pillar-card.is-active .pillar-art { opacity: .28; transform: translate3d(-2px, -2px, 0) scale(1.02); }
 
-.overall-card {
-  position: relative;
-  overflow: hidden;
-  isolation: isolate;
-}
-.overall-card::after {
-  content: "";
+.evidence-detail > .evidence-detail__art {
   position: absolute;
   z-index: 0;
-  top: 3%;
-  right: -1%;
-  width: min(440px, 42%);
-  height: 92%;
-  pointer-events: none;
-  opacity: .1;
-  background: url('/assets/generated/facial-mesh.png') 100% 50% / contain no-repeat;
-  mix-blend-mode: multiply;
-}
-.overall-card > * { position: relative; z-index: 1; }
-
-.clinic-demo-cta {
-  position: relative;
-  overflow: hidden;
-  isolation: isolate;
-}
-.clinic-demo-cta::after {
-  content: "";
-  position: absolute;
-  z-index: 0;
-  right: 3%;
-  bottom: -16%;
-  width: min(420px, 38%);
-  height: 140%;
-  pointer-events: none;
+  right: -15%;
+  bottom: -18%;
+  width: 72%;
+  max-height: 64%;
   opacity: .13;
-  background: url('/assets/generated/capture-devices.png') 100% 50% / contain no-repeat;
-  mix-blend-mode: multiply;
-  transform: rotate(-4deg);
+  filter: drop-shadow(0 24px 36px rgba(41, 77, 117, .12));
+  transform: rotate(-8deg);
 }
-.clinic-demo-cta > * { position: relative; z-index: 1; }
+.evidence-detail:hover > .evidence-detail__art {
+  opacity: .19;
+  transform: rotate(-5deg) scale(1.025);
+}
+.evidence-detail__art {
+  transition: opacity 360ms ease, transform 620ms cubic-bezier(.16,1,.3,1);
+}
 
-.clinic-hardware__visual {
+.trust .section-shell {
   position: relative;
   isolation: isolate;
 }
-.clinic-hardware__visual::after {
-  content: "";
+.trust .landing-science-art--collagen {
   position: absolute;
-  z-index: 1;
-  right: 4%;
-  bottom: -8%;
-  width: 34%;
-  height: 70%;
-  pointer-events: none;
-  opacity: .18;
-  background: url('/assets/generated/profile-contour.png') 100% 100% / contain no-repeat;
-  mix-blend-mode: screen;
+  z-index: 0;
+  top: 4%;
+  right: -8%;
+  width: min(720px, 58vw);
+  opacity: .14;
+  filter: drop-shadow(0 28px 44px rgba(42, 78, 117, .12));
+  transform: rotate(-7deg);
 }
-.clinic-hardware__visual img { position: relative; z-index: 0; }
+.trust .section-heading,
+.trust .trust-columns {
+  position: relative;
+  z-index: 1;
+}
 
-@media (max-width: 720px) {
-  .pillar-card .pillar-art { width: 50%; opacity: .14; }
-  .overall-card::after { width: 58%; opacity: .07; }
-  .clinic-demo-cta::after { right: -8%; width: 58%; opacity: .08; }
-  .clinic-hardware__visual::after { opacity: .1; }
+@keyframes landingScienceFloat {
+  0%, 100% { transform: rotate(7deg) translate3d(0, 0, 0); }
+  50% { transform: rotate(5deg) translate3d(0, -12px, 0); }
+}
+
+@media (max-width: 900px) {
+  .hero-stage > .landing-science-art--dna {
+    top: 14%;
+    right: -42px;
+    width: clamp(190px, 38vw, 280px);
+    opacity: .18;
+  }
+  .evidence-detail > .evidence-detail__art { width: 62%; opacity: .1; }
+  .trust .landing-science-art--collagen { right: -18%; width: 84vw; opacity: .1; }
+}
+
+@media (max-width: 520px) {
+  .hero-stage > .landing-science-art--dna {
+    top: 13%;
+    right: -64px;
+    width: 210px;
+    opacity: .12;
+  }
+  .evidence-detail > .evidence-detail__art { right: -20%; bottom: -10%; width: 78%; opacity: .08; }
+  .trust .landing-science-art--collagen { top: 8%; right: -42%; width: 118vw; opacity: .075; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-stage > .landing-science-art--dna { animation: none; }
 }

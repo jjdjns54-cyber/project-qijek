@@ -2087,6 +2087,14 @@ function AppearanceEvidence({ locale }: { locale: Locale }) {
             {active.source}
             <ArrowRight size={16} />
           </a>
+          <img
+            className="evidence-detail__art"
+            src="/assets/science/cell-cluster-v1.png"
+            alt=""
+            aria-hidden="true"
+            loading="lazy"
+            decoding="async"
+          />
         </article>
       </div>
       <p className="section-shell appearance-evidence__note">
@@ -2898,6 +2906,14 @@ function App() {
           </button>
         </header>
 
+        <img
+          className="landing-science-art landing-science-art--dna"
+          src="/assets/science/dna-glass-v1.png"
+          alt=""
+          aria-hidden="true"
+          decoding="async"
+        />
+
         <section className="hero section-shell">
           <div className="hero-copy">
             <div className="hero-message">
@@ -2976,6 +2992,14 @@ function App() {
 
       <section className="trust" id="safety">
         <div className="section-shell">
+          <img
+            className="landing-science-art landing-science-art--collagen"
+            src="/assets/science/collagen-ribbon-v1.png"
+            alt=""
+            aria-hidden="true"
+            loading="lazy"
+            decoding="async"
+          />
           <div className="section-heading section-heading--center">
             <h2>{copy.safetyTitle}</h2>
           </div>
