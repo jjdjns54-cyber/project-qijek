@@ -6487,6 +6487,7 @@ body {
 .progress-plan {
   position: relative;
   isolation: isolate;
+  overflow: hidden;
   margin-block: clamp(110px, 11vw, 170px);
   padding-block: clamp(58px, 6vw, 86px);
   scroll-margin-top: 88px;
@@ -11496,7 +11497,7 @@ body:has(.results-page) {
 }
 
 .treatment-preview > .static-luxury-art--membrane {
-  right: -8%;
+  right: -1%;
   bottom: -7%;
   width: clamp(300px, 40vw, 610px);
   opacity: .7;
@@ -11514,6 +11515,7 @@ body:has(.results-page) {
 .pricing {
   position: relative;
   isolation: isolate;
+  overflow: hidden;
 }
 
 .pricing > .static-luxury-art--arcs {
@@ -11521,6 +11523,54 @@ body:has(.results-page) {
   top: -5%;
   width: min(680px, 51vw);
   opacity: .7;
+}
+
+.next-steps,
+.faq {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+}
+
+.next-steps > :not(.static-luxury-art),
+.progress-plan > :not(.static-luxury-art),
+.clinic-bridge > :not(.static-luxury-art),
+.faq > :not(.static-luxury-art) {
+  position: relative;
+  z-index: 1;
+}
+
+.next-steps > .static-luxury-art--orbit {
+  right: -7%;
+  top: 2%;
+  width: clamp(210px, 24vw, 360px);
+  opacity: .68;
+  transform: rotate(9deg);
+}
+
+.progress-plan > .static-luxury-art--topography {
+  right: -8%;
+  top: 1%;
+  width: min(760px, 55vw);
+  opacity: .62;
+  transform: rotate(-4deg);
+}
+
+.clinic-bridge > .static-luxury-art--microfluidic {
+  right: -5%;
+  bottom: -13%;
+  width: min(820px, 58vw);
+  opacity: .66;
+  transform: rotate(-7deg);
+}
+
+.faq > .static-luxury-art--specimen {
+  left: 8%;
+  top: 7%;
+  width: clamp(210px, 23vw, 340px);
+  opacity: .88;
+  transform: rotate(-13deg);
+  filter: brightness(.88) contrast(1.42) saturate(.48) drop-shadow(0 28px 42px rgba(39, 77, 119, .16));
 }
 
 @media (max-width: 720px) {
@@ -11537,7 +11587,11 @@ body:has(.results-page) {
   .hero-stage > .static-luxury-art--ring { right: -48px; bottom: 9%; width: 190px; opacity: .7; }
   .appearance-evidence > .static-luxury-art--prisms { left: -22%; width: 270px; opacity: .7; }
   .analysis-showcase > .static-luxury-art--molecule { left: -30%; width: 300px; opacity: .7; }
-  .treatment-preview > .static-luxury-art--membrane { right: -36%; width: 420px; opacity: .7; }
+  .treatment-preview > .static-luxury-art--membrane { right: 0; width: 320px; opacity: .7; }
   .trust .static-luxury-art--pearls { left: -28%; width: 300px; opacity: .7; }
   .pricing > .static-luxury-art--arcs { right: -38%; width: 470px; opacity: .7; }
+  .next-steps > .static-luxury-art--orbit { right: -29%; top: 1%; width: 230px; opacity: .54; }
+  .progress-plan > .static-luxury-art--topography { right: -48%; top: 5%; width: 520px; opacity: .48; }
+  .clinic-bridge > .static-luxury-art--microfluidic { right: -54%; bottom: -5%; width: 560px; opacity: .52; }
+  .faq > .static-luxury-art--specimen { left: -24%; top: 9%; width: 240px; opacity: .66; }
 }

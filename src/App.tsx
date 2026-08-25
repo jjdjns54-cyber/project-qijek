@@ -2174,6 +2174,14 @@ function NextSteps({ locale }: { locale: Locale }) {
   };
   return (
     <section className="next-steps section-shell" id="next-steps">
+      <img
+        className="static-luxury-art static-luxury-art--orbit"
+        src="/assets/science/glass-orbit-cluster-v1.png"
+        alt=""
+        aria-hidden="true"
+        loading="lazy"
+        decoding="async"
+      />
       <div className="next-steps__intro">
         <p>{locale === "th" ? "ลำดับที่เหมาะกับคุณ" : "OUR NEXT STEPS"}</p>
         <h2>
@@ -2329,6 +2337,14 @@ function ProgressTimeline({ locale }: { locale: Locale }) {
   };
   return (
     <section className="progress-plan section-shell" id="how">
+      <img
+        className="static-luxury-art static-luxury-art--topography"
+        src="/assets/science/topographic-wave-v1.png"
+        alt=""
+        aria-hidden="true"
+        loading="lazy"
+        decoding="async"
+      />
       <div className="progress-plan__heading">
         <h2>
           {locale === "th"
@@ -2399,6 +2415,14 @@ function ProgressTimeline({ locale }: { locale: Locale }) {
 function ClinicBridge({ locale }: { locale: Locale }) {
   return (
     <section className="clinic-bridge clinic-bridge--pilot" id="clinics">
+      <img
+        className="static-luxury-art static-luxury-art--microfluidic"
+        src="/assets/science/microfluidic-ribbon-v1.png"
+        alt=""
+        aria-hidden="true"
+        loading="lazy"
+        decoding="async"
+      />
       <div className="section-shell">
         <div className="clinic-bridge__intro">
           <div>
@@ -3149,6 +3173,14 @@ function App() {
       <ClinicBusinessFlow locale={locale} />
 
       <section className="faq section-shell">
+        <img
+          className="static-luxury-art static-luxury-art--specimen"
+          src="/assets/science/crystal-specimen-v1.png"
+          alt=""
+          aria-hidden="true"
+          loading="lazy"
+          decoding="async"
+        />
         <div className="section-heading">
           <h2>
             {locale === "th" ? "คำถามที่พบบ่อย" : "Frequently asked questions"}
