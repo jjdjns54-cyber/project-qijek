@@ -11296,7 +11296,6 @@ body:has(.results-page) {
   opacity: .34;
   filter: drop-shadow(0 28px 42px rgba(42, 78, 117, .12));
   transform: rotate(7deg) translate3d(0, 0, 0);
-  animation: landingScienceFloat 11s ease-in-out infinite;
 }
 .hero-stage > .site-header,
 .hero-stage > .hero {
@@ -11314,13 +11313,6 @@ body:has(.results-page) {
   opacity: .13;
   filter: drop-shadow(0 24px 36px rgba(41, 77, 117, .12));
   transform: rotate(-8deg);
-}
-.evidence-detail:hover > .evidence-detail__art {
-  opacity: .19;
-  transform: rotate(-5deg) scale(1.025);
-}
-.evidence-detail__art {
-  transition: opacity 360ms ease, transform 620ms cubic-bezier(.16,1,.3,1);
 }
 
 .trust .section-shell {
@@ -11341,11 +11333,6 @@ body:has(.results-page) {
 .trust .trust-columns {
   position: relative;
   z-index: 1;
-}
-
-@keyframes landingScienceFloat {
-  0%, 100% { transform: rotate(7deg) translate3d(0, 0, 0); }
-  50% { transform: rotate(5deg) translate3d(0, -12px, 0); }
 }
 
 @media (max-width: 900px) {
@@ -11370,10 +11357,6 @@ body:has(.results-page) {
   .trust .landing-science-art--collagen { top: 8%; right: -42%; width: 118vw; opacity: .075; }
 }
 
-@media (prefers-reduced-motion: reduce) {
-  .hero-stage > .landing-science-art--dna { animation: none; }
-}
-
 /* Landing-only premium optical elements */
 .analysis-showcase .metric-row {
   position: relative;
@@ -11390,17 +11373,13 @@ body:has(.results-page) {
   right: -40px;
   top: 50%;
   background: url("/assets/science/glass-lens-v1.png") center / contain no-repeat;
-  opacity: 0;
-  transform: translate3d(18px, -50%, 0) rotate(8deg) scale(.86);
-  transition:
-    opacity 320ms ease,
-    transform 480ms cubic-bezier(.16, 1, .3, 1);
+  opacity: .075;
+  transform: translate3d(0, -50%, 0) rotate(3deg);
 }
 
 .analysis-showcase .metric-row:hover::after,
 .analysis-showcase .metric-row.is-active::after {
   opacity: .18;
-  transform: translate3d(0, -50%, 0) rotate(3deg) scale(1);
 }
 
 .science-ribbon-divider {
@@ -11466,48 +11445,82 @@ body:has(.results-page) {
   z-index: 1;
 }
 
-.button,
-.analysis-showcase .metric-row,
-.treatment-preview__card,
-.trust-columns article {
-  isolation: isolate;
+.static-luxury-art {
+  position: absolute;
+  z-index: 0;
+  object-fit: contain;
+  pointer-events: none;
+  user-select: none;
+  filter: drop-shadow(0 24px 38px rgba(39, 77, 119, .11));
 }
 
-.button {
+.hero-stage > .landing-science-art--dna {
+  animation: none;
+}
+
+.hero-stage > .static-luxury-art--ring {
+  right: clamp(24px, 5vw, 86px);
+  bottom: 8%;
+  width: clamp(150px, 18vw, 270px);
+  opacity: .27;
+  transform: rotate(-13deg);
+}
+
+.appearance-evidence {
   position: relative;
+  isolation: isolate;
   overflow: hidden;
 }
 
-.button::before,
-.analysis-showcase .metric-row::before,
-.treatment-preview__card::after,
-.trust-columns article::after {
-  content: "";
-  position: absolute;
-  z-index: 5;
-  top: -80%;
-  bottom: -80%;
-  left: -75%;
-  width: 58%;
-  background: url("/assets/science/light-sweep-v1.png") center / 100% 100% no-repeat;
-  opacity: 0;
-  pointer-events: none;
-  transform: translate3d(0, 0, 0) rotate(-5deg);
+.appearance-evidence > .static-luxury-art--prisms {
+  left: -6%;
+  bottom: 3%;
+  width: clamp(210px, 24vw, 380px);
+  opacity: .12;
+  transform: rotate(-8deg);
 }
 
-.button:hover::before,
-.analysis-showcase .metric-row:hover::before,
-.treatment-preview__card:hover::after,
-.trust-columns article:hover::after {
-  opacity: .34;
-  transform: translate3d(310%, 0, 0) rotate(-5deg);
-  transition:
-    transform 820ms cubic-bezier(.16, 1, .3, 1),
-    opacity 180ms ease;
+.appearance-evidence > .section-shell,
+.analysis-showcase > :not(.static-luxury-art),
+.pricing > :not(.static-luxury-art) {
+  position: relative;
+  z-index: 1;
 }
 
-.button--ghost::before {
-  opacity: 0;
+.analysis-showcase > .static-luxury-art--molecule {
+  left: -8%;
+  top: 19%;
+  width: clamp(220px, 28vw, 430px);
+  opacity: .105;
+  transform: rotate(11deg);
+}
+
+.treatment-preview > .static-luxury-art--membrane {
+  right: -8%;
+  bottom: -7%;
+  width: clamp(300px, 40vw, 610px);
+  opacity: .13;
+  transform: rotate(-9deg);
+}
+
+.trust .static-luxury-art--pearls {
+  left: -7%;
+  bottom: -10%;
+  width: clamp(240px, 29vw, 440px);
+  opacity: .14;
+  transform: rotate(8deg);
+}
+
+.pricing {
+  position: relative;
+  isolation: isolate;
+}
+
+.pricing > .static-luxury-art--arcs {
+  right: -9%;
+  top: -5%;
+  width: min(680px, 51vw);
+  opacity: .105;
 }
 
 @media (max-width: 720px) {
@@ -11520,13 +11533,11 @@ body:has(.results-page) {
   .science-ribbon-divider img { opacity: .3; }
   .treatment-preview__caustic { inset-inline: -24%; width: 148%; opacity: .09; }
   .analysis-showcase .metric-row::after { width: 88px; height: 88px; opacity: .1; }
-}
 
-@media (prefers-reduced-motion: reduce) {
-  .button::before,
-  .analysis-showcase .metric-row::before,
-  .treatment-preview__card::after,
-  .trust-columns article::after {
-    display: none;
-  }
+  .hero-stage > .static-luxury-art--ring { right: -48px; bottom: 9%; width: 190px; opacity: .14; }
+  .appearance-evidence > .static-luxury-art--prisms { left: -22%; width: 270px; opacity: .075; }
+  .analysis-showcase > .static-luxury-art--molecule { left: -30%; width: 300px; opacity: .065; }
+  .treatment-preview > .static-luxury-art--membrane { right: -36%; width: 420px; opacity: .075; }
+  .trust .static-luxury-art--pearls { left: -28%; width: 300px; opacity: .08; }
+  .pricing > .static-luxury-art--arcs { right: -38%; width: 470px; opacity: .065; }
 }

@@ -1871,6 +1871,14 @@ function TreatmentPreview({ locale }: { locale: Locale }) {
         loading="lazy"
         decoding="async"
       />
+      <img
+        className="static-luxury-art static-luxury-art--membrane"
+        src="/assets/science/glass-membrane-v1.png"
+        alt=""
+        aria-hidden="true"
+        loading="lazy"
+        decoding="async"
+      />
       <div className="treatment-preview__intro">
         <p className="treatment-preview__eyebrow">
           {locale === "th" ? "ตัวอย่างภาพจำลอง" : "Treatment preview"}
@@ -2017,6 +2025,14 @@ function AppearanceEvidence({ locale }: { locale: Locale }) {
 
   return (
     <section className="appearance-evidence" id="research">
+      <img
+        className="static-luxury-art static-luxury-art--prisms"
+        src="/assets/science/crystal-prisms-v1.png"
+        alt=""
+        aria-hidden="true"
+        loading="lazy"
+        decoding="async"
+      />
       <div className="section-shell appearance-evidence__intro">
         <h2>
           {locale === "th"
@@ -2921,6 +2937,13 @@ function App() {
           aria-hidden="true"
           decoding="async"
         />
+        <img
+          className="static-luxury-art static-luxury-art--ring"
+          src="/assets/science/optical-ring-v1.png"
+          alt=""
+          aria-hidden="true"
+          decoding="async"
+        />
 
         <section className="hero section-shell">
           <div className="hero-copy">
@@ -2982,6 +3005,14 @@ function App() {
       <AppearanceEvidence locale={locale} />
 
       <section className="analysis-showcase section-shell" id="product">
+        <img
+          className="static-luxury-art static-luxury-art--molecule"
+          src="/assets/science/molecular-lattice-v1.png"
+          alt=""
+          aria-hidden="true"
+          loading="lazy"
+          decoding="async"
+        />
         <div className="analysis-transition">
           <h2>{copy.analysisTitle}</h2>
           <p>{copy.analysisBody}</p>
@@ -3017,6 +3048,14 @@ function App() {
             loading="lazy"
             decoding="async"
           />
+          <img
+            className="static-luxury-art static-luxury-art--pearls"
+            src="/assets/science/micro-pearls-v1.png"
+            alt=""
+            aria-hidden="true"
+            loading="lazy"
+            decoding="async"
+          />
           <div className="section-heading section-heading--center">
             <h2>{copy.safetyTitle}</h2>
           </div>
@@ -3039,6 +3078,14 @@ function App() {
       </section>
 
       <section className="pricing section-shell" id="pricing">
+        <img
+          className="static-luxury-art static-luxury-art--arcs"
+          src="/assets/science/calibration-arcs-v1.png"
+          alt=""
+          aria-hidden="true"
+          loading="lazy"
+          decoding="async"
+        />
         <div className="section-heading">
           <h2>
             {copy.pricingTitle.split("\n").map((line, index) => (
