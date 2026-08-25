@@ -88,6 +88,16 @@ export default function ScanPage() {
     streamRef.current = null;
   }, []);
 
+  const skipScan = useCallback(() => {
+    stopCamera();
+    if (navigationTimerRef.current) window.clearTimeout(navigationTimerRef.current);
+    try {
+      window.sessionStorage.setItem("doodee:last-scan-front", "/assets/sample-face-front.png");
+      window.sessionStorage.setItem("doodee:scan-skipped", "1");
+    } catch {}
+    window.location.assign("/app?demo=1#overview");
+  }, [stopCamera]);
+
   const startFpsMeter = useCallback(() => {
     const video = videoRef.current;
     if (!video || !("requestVideoFrameCallback" in video)) return;
@@ -420,7 +430,10 @@ export default function ScanPage() {
         <div className="capture-header__state">
           <span>Auto capture</span><i />{capturedCount} of {captureSteps.length} complete
         </div>
-        <a className="capture-close" href="/" aria-label="Exit face scan"><X size={20} /></a>
+        <div className="capture-header__actions">
+          <button className="capture-skip" type="button" onClick={skipScan}>Skip scan</button>
+          <a className="capture-close" href="/" aria-label="Exit face scan"><X size={20} /></a>
+        </div>
       </header>
 
       <section className="capture-layout">
