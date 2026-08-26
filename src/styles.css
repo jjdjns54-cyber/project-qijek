@@ -60,6 +60,17 @@ body:has(.doodee-app),
   --app-blue: #087bff;
   --app-blue-soft: #eaf4ff;
   --app-glass: rgba(255, 255, 255, 0.72);
+  --app-silver-line: rgba(91, 112, 137, 0.2);
+  --app-silver-glass:
+    radial-gradient(circle at 24% 0%, rgba(255, 255, 255, 0.98), transparent 52%),
+    linear-gradient(145deg, rgba(250, 253, 255, 0.86), rgba(218, 229, 240, 0.62));
+  --app-silver-glass-hover:
+    radial-gradient(circle at 30% 0%, #fff, transparent 56%),
+    linear-gradient(145deg, rgba(255, 255, 255, 0.94), rgba(211, 225, 239, 0.76));
+  --app-silver-shadow:
+    inset 0 1px rgba(255, 255, 255, 0.98),
+    inset 0 -1px rgba(102, 127, 154, 0.16),
+    0 4px 8px rgba(35, 67, 101, 0.08);
   --app-shadow: 0 18px 55px rgba(35, 64, 98, 0.09), inset 0 1px 0 rgba(255, 255, 255, 0.9);
   display: grid;
   grid-template-columns: 282px minmax(0, 1fr);
@@ -1403,9 +1414,8 @@ body:has(.doodee-app),
   .sidebar-head > button { width: 42px; height: 42px; }
   .app-tools button:nth-child(2), .app-tools button:nth-child(3) { display: none; }
   .app-content { width: min(100% - 20px, 580px); padding: 12px 0 34px; }
-  .app-pillar-grid { display: flex; gap: 9px; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; }
-  .app-pillar-grid::-webkit-scrollbar { display: none; }
-  .pillar-card { min-width: 172px; min-height: 132px; padding: 16px; scroll-snap-align: start; }
+  .app-pillar-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 9px; overflow: hidden; }
+  .pillar-card { min-width: 0; min-height: 132px; padding: 16px; }
   .pillar-card strong { margin-top: 19px; font-size: 31px; }
   .overall-card { padding: 18px; border-radius: 21px; }
   .overall-card h1 { font-size: 27px; }
@@ -1489,8 +1499,13 @@ body:has(.doodee-app),
   isolation: isolate;
   border-color: rgba(255, 255, 255, .76);
   border-radius: 12px;
-  background: rgba(255,255,255,.54);
-  box-shadow: inset 0 1px rgba(255,255,255,.92);
+  background:
+    radial-gradient(circle at 82% 68%, rgba(197, 227, 253, .34), transparent 46%),
+    linear-gradient(135deg, rgba(255,255,255,.79), rgba(241,248,255,.56));
+  box-shadow:
+    inset 0 1px rgba(255,255,255,.98),
+    inset 0 -1px rgba(151, 195, 235, .12),
+    0 8px 22px rgba(37, 82, 128, .06);
   backdrop-filter: blur(16px) saturate(118%);
   transition: transform 200ms cubic-bezier(.16,1,.3,1), background-color 200ms ease, border-color 200ms ease, box-shadow 200ms ease;
 }
@@ -1511,15 +1526,52 @@ body:has(.doodee-app),
 }
 
 .pillar-art {
-  display: none;
+  display: block;
+  width: 54%;
+  aspect-ratio: 1;
+  position: absolute;
+  z-index: 0;
+  right: -7%;
+  bottom: -24%;
+  pointer-events: none;
+  background-image: url("/assets/app-pillar-ornaments-v1.png");
+  background-repeat: no-repeat;
+  background-size: 400% 100%;
+  opacity: .46;
+  filter: saturate(.66) contrast(.94) drop-shadow(0 8px 14px rgba(44, 104, 159, .12));
+  transform: rotate(-4deg);
+}
+
+.pillar-art--harmony { background-position: 0 50%; }
+.pillar-art--angularity { background-position: 33.333% 50%; transform: rotate(5deg); }
+.pillar-art--dimorphism { background-position: 66.666% 50%; }
+.pillar-art--features { background-position: 100% 50%; transform: rotate(4deg); }
+
+.pillar-card::after {
+  content: "";
+  width: 58%;
+  height: 42%;
+  position: absolute;
+  right: -12%;
+  bottom: -18%;
+  z-index: 0;
+  pointer-events: none;
+  border-radius: 50%;
+  background: radial-gradient(ellipse, rgba(255,255,255,.82), rgba(169,212,249,.2) 52%, transparent 74%);
+  filter: blur(8px);
 }
 
 .pillar-card:hover,
 .pillar-card.is-active {
   border-color: rgba(116, 179, 237, .44);
   background: rgba(255,255,255,.76);
-  box-shadow: inset 0 1px rgba(255,255,255,.98), 0 4px 8px rgba(39, 83, 128, .08);
+  box-shadow: inset 0 1px rgba(255,255,255,.98), 0 12px 26px rgba(39, 83, 128, .1);
   transform: translateY(-1px);
+}
+
+.pillar-card:hover .pillar-art,
+.pillar-card.is-active .pillar-art {
+  opacity: .58;
 }
 
 .pillar-card strong {
@@ -1759,7 +1811,12 @@ body:has(.doodee-app),
   .unlock-modal--unlocking { min-height: 510px; }
   .unlock-loading { min-height: 470px; grid-template-rows: minmax(300px,1fr) auto; }
   .unlock-loading__visual { min-height: 300px; }
-  .pillar-art { opacity: .28; }
+  .pillar-art {
+    width: 58%;
+    right: -10%;
+    bottom: -20%;
+    opacity: .38;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -11601,6 +11658,181 @@ body:has(.results-page) {
   .progress-plan > .static-luxury-art--topography { right: -48%; top: 5%; width: 520px; opacity: .48; }
   .clinic-bridge > .static-luxury-art--microfluidic { right: -54%; bottom: -5%; width: 560px; opacity: .52; }
   .faq > .static-luxury-art--specimen { left: -24%; top: 9%; width: 240px; opacity: .66; }
+}
+
+/* Locked numerical previews */
+.locked-number {
+  display: inline-flex;
+  align-items: baseline;
+  gap: .12em;
+  min-width: 2.25em;
+  color: currentColor;
+  white-space: nowrap;
+  vertical-align: baseline;
+}
+
+.locked-number__blur {
+  display: inline-flex;
+  align-items: baseline;
+  gap: .02em;
+  opacity: .58;
+  filter: blur(4.2px);
+  user-select: none;
+}
+
+.locked-number__reel {
+  display: block;
+  width: .62em;
+  height: 1em;
+  overflow: hidden;
+  line-height: 1;
+}
+
+.locked-number__reel > span {
+  display: flex;
+  flex-direction: column;
+  will-change: transform;
+  animation: lockedNumberRoll 2.4s steps(10, end) infinite;
+}
+
+.locked-number__reel:nth-of-type(3) > span {
+  animation-duration: 1.85s;
+  animation-delay: -.72s;
+}
+
+.locked-number__reel i {
+  height: 1em;
+  flex: 0 0 1em;
+  font: inherit;
+  font-style: normal;
+  line-height: 1;
+  text-align: center;
+}
+
+.locked-number__dot { line-height: 1; }
+.locked-number > small { opacity: .34; font-size: .34em; letter-spacing: 0; }
+.locked-number--compact { min-width: 2.15em; font-size: 14px; font-weight: 650; }
+.locked-number--compact .locked-number__blur { filter: blur(3.2px); }
+
+.pillar-card.is-locked strong.locked-score-shell {
+  filter: none;
+  opacity: 1;
+}
+
+.locked-metric-value,
+.locked-impact {
+  display: inline-flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 6px;
+}
+
+.locked-metric-value svg,
+.locked-impact svg {
+  width: 12px;
+  height: 12px;
+  opacity: .52;
+}
+
+.ratio-row.is-locked .ratio-score { filter: none; }
+
+@keyframes lockedNumberRoll {
+  from { transform: translateY(0); }
+  to { transform: translateY(-10em); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .locked-number__reel > span {
+    animation: none;
+    transform: translateY(-4em);
+  }
+}
+
+/* Product controls · frosted silver glass */
+:is(
+  .app-tools button,
+  .app-menu,
+  .insight-panel header > button,
+  .pillar-progress-card > button,
+  .continue-analysis__actions button,
+  .metric-methods button:not(.is-active),
+  .metric-groups button:not(.is-active),
+  .analysis-profile-strip > button:not(.is-active),
+  .analysis-face-controls button,
+  .ratio-panel header button:not(.ratio-unlock),
+  .ratio-modal > header button,
+  .ratio-modal > nav button:not(.is-active),
+  .plan-mode button:not(.is-active),
+  .plan-action-detail button,
+  .gpt-history header button,
+  .gpt-suggestions button,
+  .gpt-chat form > button:not(:last-child)
+) {
+  border: 1px solid var(--app-silver-line);
+  background: var(--app-silver-glass);
+  box-shadow: var(--app-silver-shadow);
+  color: #506075;
+  backdrop-filter: blur(18px) saturate(118%);
+  -webkit-backdrop-filter: blur(18px) saturate(118%);
+  transition:
+    transform 180ms cubic-bezier(.16, 1, .3, 1),
+    border-color 180ms ease,
+    background 180ms ease,
+    color 180ms ease,
+    box-shadow 180ms ease;
+}
+
+:is(
+  .app-tools button,
+  .app-menu,
+  .insight-panel header > button,
+  .pillar-progress-card > button,
+  .continue-analysis__actions button,
+  .metric-methods button:not(.is-active),
+  .metric-groups button:not(.is-active),
+  .analysis-profile-strip > button:not(.is-active),
+  .analysis-face-controls button,
+  .ratio-panel header button:not(.ratio-unlock),
+  .ratio-modal > header button,
+  .ratio-modal > nav button:not(.is-active),
+  .plan-mode button:not(.is-active),
+  .plan-action-detail button,
+  .gpt-history header button,
+  .gpt-suggestions button,
+  .gpt-chat form > button:not(:last-child)
+):hover {
+  border-color: rgba(88, 119, 151, 0.3);
+  background: var(--app-silver-glass-hover);
+  box-shadow:
+    inset 0 1px #fff,
+    inset 0 -1px rgba(83, 112, 143, 0.18),
+    0 5px 8px rgba(35, 67, 101, 0.11);
+  color: var(--app-ink);
+  transform: translateY(-1px);
+}
+
+:is(
+  .app-tools button,
+  .app-menu,
+  .analysis-face-controls button,
+  .ratio-panel header button:not(.ratio-unlock),
+  .plan-action-detail button,
+  .gpt-history header button,
+  .gpt-suggestions button
+):active {
+  transform: translateY(0);
+  box-shadow:
+    inset 0 1px rgba(116, 141, 169, 0.18),
+    inset 0 -1px rgba(255, 255, 255, 0.86);
+}
+
+.app-tools button svg,
+.app-menu svg,
+.analysis-face-controls button svg,
+.ratio-panel header button:not(.ratio-unlock) svg,
+.plan-action-detail button svg,
+.gpt-history header button svg {
+  filter: drop-shadow(0 1px rgba(255, 255, 255, 0.92));
 }
 
 /* Viewport and persistent navigation guard */

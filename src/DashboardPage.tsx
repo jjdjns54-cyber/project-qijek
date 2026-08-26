@@ -105,6 +105,42 @@ const pillars: {
   },
 ];
 
+const lockedReelDigits = ["7", "2", "9", "4", "1", "8", "3", "6", "0", "5", "7"];
+
+function LockedNumber({
+  suffix = "/10",
+  compact = false,
+}: {
+  suffix?: string;
+  compact?: boolean;
+}) {
+  return (
+    <span
+      className={`locked-number ${compact ? "locked-number--compact" : ""}`}
+      aria-label="Locked numeric result"
+    >
+      <span className="locked-number__blur" aria-hidden="true">
+        <span className="locked-number__reel">
+          <span>
+            {lockedReelDigits.map((digit, index) => (
+              <i key={`a-${index}`}>{digit}</i>
+            ))}
+          </span>
+        </span>
+        <span className="locked-number__dot">.</span>
+        <span className="locked-number__reel">
+          <span>
+            {lockedReelDigits.map((digit, index) => (
+              <i key={`b-${index}`}>{digit}</i>
+            ))}
+          </span>
+        </span>
+      </span>
+      {suffix && <small aria-hidden="true">{suffix}</small>}
+    </span>
+  );
+}
+
 const ratios: Record<PillarId, RatioMetric[]> = {
   harmony: [
     {
@@ -814,9 +850,15 @@ function Overview({
               {item.label}
               <ArrowRight />
             </span>
-            <strong aria-hidden={item.locked}>
-              {item.score}
-              <small>/10</small>
+            <strong className={item.locked ? "locked-score-shell" : undefined}>
+              {item.locked ? (
+                <LockedNumber />
+              ) : (
+                <>
+                  {item.score}
+                  <small>/10</small>
+                </>
+              )}
             </strong>
             {item.locked ? (
               <span className="pillar-unlock">
@@ -1176,6 +1218,7 @@ function MeasurementLibrary({ onUnlock }: { onUnlock: () => void }) {
               <div>
                 <dt>Your result</dt>
                 <dd className="is-locked">
+                  <LockedNumber suffix="" compact />
                   <LockKeyhole /> Reveal this measurement
                 </dd>
               </div>
@@ -1375,7 +1418,9 @@ function Analysis({
           <img src={scanImage} alt="Front view" />
           <span>
             <small>Front</small>
-            <strong>{pillar === "harmony" ? "7.4" : "Locked"}</strong>
+            <strong>
+              {pillar === "harmony" ? "7.4" : <LockedNumber suffix="" compact />}
+            </strong>
           </span>
         </button>
         <button
@@ -1415,9 +1460,11 @@ function Analysis({
               {angle} {pillars.find((item) => item.id === pillar)?.label}
             </span>
             <strong>
-              {pillarLocked
-                ? "Locked"
-                : `${list[activeIndex]?.score.toFixed(1)}/10`}
+              {pillarLocked ? (
+                <LockedNumber />
+              ) : (
+                `${list[activeIndex]?.score.toFixed(1)}/10`
+              )}
             </strong>
             <small>{list[activeIndex]?.name}</small>
           </div>
@@ -1495,9 +1542,22 @@ function Analysis({
                     <i style={{ width: `${metric.score * 10}%` }} />
                     <b style={{ left: `${metric.score * 10}%` }} />
                   </div>
-                  <em>{locked ? <LockKeyhole /> : metric.value}</em>
+                  <em>
+                    {locked ? (
+                      <span className="locked-metric-value">
+                        <LockedNumber suffix="" compact />
+                        <LockKeyhole />
+                      </span>
+                    ) : (
+                      metric.value
+                    )}
+                  </em>
                   <span className="ratio-score">
-                    {locked ? "?.?" : metric.score.toFixed(1)}
+                    {locked ? (
+                      <LockedNumber suffix="" compact />
+                    ) : (
+                      metric.score.toFixed(1)
+                    )}
                   </span>
                   <ChevronDown />
                 </button>
@@ -1667,7 +1727,16 @@ function Plan({
                   </span>
                   <p>{action.detail}</p>
                 </div>
-                <b>{action.locked ? <LockKeyhole /> : action.impact}</b>
+                <b>
+                  {action.locked ? (
+                    <span className="locked-impact">
+                      <LockedNumber suffix=" pts" compact />
+                      <LockKeyhole />
+                    </span>
+                  ) : (
+                    action.impact
+                  )}
+                </b>
                 <ChevronDown />
               </button>
               <div className="plan-action-detail">
