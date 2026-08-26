@@ -120,7 +120,7 @@ function LockedNumber({
       aria-label="Locked numeric result"
     >
       <span className="locked-number__blur" aria-hidden="true">
-        <span className="locked-number__reel">
+        <span className="locked-number__reel locked-number__reel--first">
           <span>
             {lockedReelDigits.map((digit, index) => (
               <i key={`a-${index}`}>{digit}</i>
@@ -128,7 +128,7 @@ function LockedNumber({
           </span>
         </span>
         <span className="locked-number__dot">.</span>
-        <span className="locked-number__reel">
+        <span className="locked-number__reel locked-number__reel--second">
           <span>
             {lockedReelDigits.map((digit, index) => (
               <i key={`b-${index}`}>{digit}</i>

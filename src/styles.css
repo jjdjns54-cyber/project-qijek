@@ -11677,6 +11677,9 @@ body:has(.results-page) {
   gap: .02em;
   opacity: .58;
   filter: blur(4.2px);
+  contain: paint;
+  transform: translateZ(0);
+  backface-visibility: hidden;
   user-select: none;
 }
 
@@ -11686,18 +11689,22 @@ body:has(.results-page) {
   height: 1em;
   overflow: hidden;
   line-height: 1;
+  contain: paint;
+  -webkit-mask-image: linear-gradient(to bottom, transparent 0%, #000 16%, #000 84%, transparent 100%);
+  mask-image: linear-gradient(to bottom, transparent 0%, #000 16%, #000 84%, transparent 100%);
 }
 
 .locked-number__reel > span {
   display: flex;
   flex-direction: column;
+  transform: translate3d(0, 0, 0);
+  backface-visibility: hidden;
   will-change: transform;
-  animation: lockedNumberRoll 2.4s steps(10, end) infinite;
+  animation: lockedNumberSlot 3.7s linear infinite;
 }
 
-.locked-number__reel:nth-of-type(3) > span {
-  animation-duration: 1.85s;
-  animation-delay: -.72s;
+.locked-number__reel--second > span {
+  animation-name: lockedNumberSlotSecond;
 }
 
 .locked-number__reel i {
@@ -11709,7 +11716,12 @@ body:has(.results-page) {
   text-align: center;
 }
 
-.locked-number__dot { line-height: 1; }
+.locked-number__dot {
+  width: .06em;
+  overflow: hidden;
+  color: transparent;
+  line-height: 1;
+}
 .locked-number > small { opacity: .34; font-size: .34em; letter-spacing: 0; }
 .locked-number--compact { min-width: 2.15em; font-size: 14px; font-weight: 650; }
 .locked-number--compact .locked-number__blur { filter: blur(3.2px); }
@@ -11736,15 +11748,34 @@ body:has(.results-page) {
 
 .ratio-row.is-locked .ratio-score { filter: none; }
 
-@keyframes lockedNumberRoll {
-  from { transform: translateY(0); }
-  to { transform: translateY(-10em); }
+@keyframes lockedNumberSlot {
+  0% {
+    transform: translate3d(0, 0, 0);
+    animation-timing-function: cubic-bezier(.42, 0, .78, .34);
+  }
+  50% {
+    transform: translate3d(0, -6.35em, 0);
+    animation-timing-function: cubic-bezier(.12, .68, .12, 1);
+  }
+  72%, 100% { transform: translate3d(0, -10em, 0); }
+}
+
+@keyframes lockedNumberSlotSecond {
+  0% {
+    transform: translate3d(0, 0, 0);
+    animation-timing-function: cubic-bezier(.44, 0, .8, .32);
+  }
+  54% {
+    transform: translate3d(0, -6.1em, 0);
+    animation-timing-function: cubic-bezier(.1, .7, .1, 1);
+  }
+  78%, 100% { transform: translate3d(0, -10em, 0); }
 }
 
 @media (prefers-reduced-motion: reduce) {
   .locked-number__reel > span {
     animation: none;
-    transform: translateY(-4em);
+    transform: translate3d(0, -4em, 0);
   }
 }
 
