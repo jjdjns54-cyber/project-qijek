@@ -34,6 +34,31 @@ type Candidate = { score: number };
 const emptyCandidates = () => captureSteps.map(() => null as Candidate | null);
 const emptyCandidateCounts = () => captureSteps.map(() => 0);
 
+function requestCamera(constraints: MediaStreamConstraints, timeoutMs = 7000) {
+  return new Promise<MediaStream>((resolve, reject) => {
+    let finished = false;
+    const timeout = window.setTimeout(() => {
+      finished = true;
+      reject(new Error("camera-timeout"));
+    }, timeoutMs);
+
+    navigator.mediaDevices.getUserMedia(constraints).then((stream) => {
+      window.clearTimeout(timeout);
+      if (finished) {
+        stream.getTracks().forEach((track) => track.stop());
+        return;
+      }
+      finished = true;
+      resolve(stream);
+    }).catch((cameraError) => {
+      window.clearTimeout(timeout);
+      if (finished) return;
+      finished = true;
+      reject(cameraError);
+    });
+  });
+}
+
 function referencePosition(index: number) {
   return ["100% 0%", "0% 0%", "50% 100%"][index];
 }
@@ -324,23 +349,15 @@ export default function ScanPage() {
     lastVideoTimeRef.current = -1;
     try {
       if (!navigator.mediaDevices?.getUserMedia) throw new Error("unsupported");
-      let stream: MediaStream;
-      try {
-        stream = await navigator.mediaDevices.getUserMedia({
-          audio: false,
-          video: {
-            facingMode: { ideal: "user" },
-            width: { ideal: 1920 },
-            height: { ideal: 1440 },
-            frameRate: { ideal: 60 },
-          },
-        });
-      } catch {
-        stream = await navigator.mediaDevices.getUserMedia({
-          audio: false,
-          video: { width: { ideal: 1920 }, height: { ideal: 1440 }, frameRate: { ideal: 60 } },
-        });
-      }
+      const stream = await requestCamera({
+        audio: false,
+        video: {
+          facingMode: { ideal: "user" },
+          width: { ideal: 1920 },
+          height: { ideal: 1440 },
+          frameRate: { ideal: 60 },
+        },
+      });
       if (runId !== runIdRef.current) {
         stream.getTracks().forEach((track) => track.stop());
         return;
@@ -404,10 +421,12 @@ export default function ScanPage() {
       runningRef.current = true;
       setQuality({ valid: false, message: "Move your face into the guide", score: 0 });
       rafRef.current = requestAnimationFrame(() => void detectionLoop());
-    } catch {
+    } catch (cameraError) {
       if (runId !== runIdRef.current) return;
       stopCamera();
-      setError("Camera access is required. Allow camera access in your browser, then try again.");
+      setError(cameraError instanceof Error && cameraError.message === "camera-timeout"
+        ? "The camera did not respond. Check camera permission, then try again."
+        : "Camera access is required. Allow camera access in your browser, then try again.");
       setPhase("error");
     }
   }, [detectionLoop, processLandmarks, startFpsMeter, stopCamera]);

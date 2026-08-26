@@ -11863,3 +11863,80 @@ body,
     margin: 0;
   }
 }
+
+@media (max-width: 920px) {
+  .app-menu,
+  .app-tools button,
+  .sidebar-head > button,
+  .capture-close {
+    width: 44px;
+    height: 44px;
+  }
+
+  .site-header .brand,
+  .login-header .brand,
+  .onboarding-header .brand,
+  .capture-header .brand,
+  .sidebar-head .brand {
+    min-height: 44px;
+  }
+
+  .sidebar-nav button,
+  .sidebar-upgrade,
+  .sidebar-new,
+  .sidebar-foot button,
+  .capture-skip {
+    min-height: 44px;
+  }
+
+  .sidebar-new {
+    padding-inline: 8px;
+  }
+
+  .nav > a,
+  .mobile-nav-actions .button,
+  .header-locale button,
+  .menu-toggle,
+  .analysis-pillar-nav button,
+  .ratio-panel > header button,
+  .ratio-show-more,
+  .insight-more,
+  .pillar-progress-card button,
+  .plan-mode button,
+  .plan-timeline > button,
+  .plan-timeline > * > button,
+  .plan-action-detail button,
+  .gpt-history header button,
+  .gpt-mode,
+  .gpt-chat form > button {
+    min-width: 44px;
+    min-height: 44px;
+  }
+
+  .login-legal a {
+    display: inline-flex;
+    min-height: 44px;
+    align-items: center;
+    margin-block: -12px;
+    padding-inline: 5px;
+    margin-inline: -5px;
+  }
+
+  .plan-timeline > * > button {
+    height: 44px;
+  }
+}
+
+@media (max-width: 620px) {
+  .potential-meta {
+    display: grid !important;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 6px !important;
+    overflow: visible;
+  }
+
+  .potential-meta span {
+    min-width: 0;
+    padding: 10px 8px;
+  }
+}
