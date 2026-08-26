@@ -1,4 +1,5 @@
 import { useEffect, useMemo, useRef, useState, type KeyboardEvent, type PointerEvent } from "react";
+import { createPortal } from "react-dom";
 import { ArrowLeft, ArrowRight, Check, ChevronDown, Globe2, Mars, Minus, Plus, Search, Venus } from "lucide-react";
 import Brand from "./Brand";
 
@@ -61,6 +62,7 @@ export default function OnboardingPage() {
   const [countryQuery, setCountryQuery] = useState("");
   const [isCountryOpen, setIsCountryOpen] = useState(false);
   const countryPickerRef = useRef<HTMLDivElement>(null);
+  const countryMenuRef = useRef<HTMLDivElement>(null);
   const countrySearchRef = useRef<HTMLInputElement>(null);
   const ageWindow = useMemo(
     () => [-2, -1, 0, 1, 2].map((offset) => Math.min(80, Math.max(15, age + offset))),
@@ -76,14 +78,24 @@ export default function OnboardingPage() {
   useEffect(() => {
     if (!isCountryOpen) return;
     const closeOnOutsideClick = (event: MouseEvent) => {
-      if (!countryPickerRef.current?.contains(event.target as Node)) setIsCountryOpen(false);
+      if (event.target instanceof Element && event.target.closest(".country-menu__scrim")) return;
+      if (
+        !countryPickerRef.current?.contains(event.target as Node)
+        && !countryMenuRef.current?.contains(event.target as Node)
+      ) setIsCountryOpen(false);
     };
     document.addEventListener("pointerdown", closeOnOutsideClick);
     return () => document.removeEventListener("pointerdown", closeOnOutsideClick);
   }, [isCountryOpen]);
 
   useEffect(() => {
-    if (isCountryOpen) requestAnimationFrame(() => countrySearchRef.current?.focus());
+    requestAnimationFrame(() => {
+      if (isCountryOpen && matchMedia("(min-width: 561px)").matches) {
+        countrySearchRef.current?.focus({ preventScroll: true });
+      }
+      const page = countryPickerRef.current?.closest<HTMLElement>(".onboarding-page");
+      if (page) page.scrollTop = 0;
+    });
   }, [isCountryOpen]);
 
   const clampAge = (value: number) => Math.min(80, Math.max(15, value));
@@ -464,45 +476,54 @@ export default function OnboardingPage() {
                   <ChevronDown aria-hidden="true" size={18} />
                 </button>
 
-                {isCountryOpen && (
-                  <div className="country-menu" id="country-options">
-                    <div className="country-menu__search">
-                      <Search aria-hidden="true" size={17} />
-                      <input
-                        aria-label="Search countries"
-                        autoComplete="off"
-                        placeholder="Search country"
-                        ref={countrySearchRef}
-                        type="search"
-                        value={countryQuery}
-                        onChange={(event) => setCountryQuery(event.target.value)}
-                        onKeyDown={(event) => {
-                          if (event.key === "Escape") setIsCountryOpen(false);
-                        }}
-                      />
-                    </div>
-                    <div aria-label="Countries" className="country-menu__list" role="listbox">
-                      {filteredCountries.map((country) => (
-                        <button
-                          aria-selected={country.code === birthCountry}
-                          className={country.code === birthCountry ? "is-selected" : ""}
-                          key={country.code}
-                          role="option"
-                          type="button"
-                          onClick={() => {
-                            setBirthCountry(country.code);
-                            setCountryQuery("");
-                            setIsCountryOpen(false);
+                {isCountryOpen && createPortal(
+                  <>
+                    <button
+                      aria-label="Close country picker"
+                      className="country-menu__scrim"
+                      type="button"
+                      onClick={() => setIsCountryOpen(false)}
+                    />
+                    <div className="country-menu" id="country-options" ref={countryMenuRef}>
+                      <div className="country-menu__search">
+                        <Search aria-hidden="true" size={17} />
+                        <input
+                          aria-label="Search countries"
+                          autoComplete="off"
+                          placeholder="Search country"
+                          ref={countrySearchRef}
+                          type="search"
+                          value={countryQuery}
+                          onChange={(event) => setCountryQuery(event.target.value)}
+                          onKeyDown={(event) => {
+                            if (event.key === "Escape") setIsCountryOpen(false);
                           }}
-                        >
-                          <img alt="" loading="lazy" src={`https://flagcdn.com/w40/${country.code.toLocaleLowerCase()}.png`} />
-                          <span>{country.name}</span>
-                          {country.code === birthCountry && <Check aria-hidden="true" size={16} />}
-                        </button>
-                      ))}
-                      {!filteredCountries.length && <p className="country-menu__empty">No country found</p>}
+                        />
+                      </div>
+                      <div aria-label="Countries" className="country-menu__list" role="listbox">
+                        {filteredCountries.map((country) => (
+                          <button
+                            aria-selected={country.code === birthCountry}
+                            className={country.code === birthCountry ? "is-selected" : ""}
+                            key={country.code}
+                            role="option"
+                            type="button"
+                            onClick={() => {
+                              setBirthCountry(country.code);
+                              setCountryQuery("");
+                              setIsCountryOpen(false);
+                            }}
+                          >
+                            <img alt="" loading="lazy" src={`https://flagcdn.com/w40/${country.code.toLocaleLowerCase()}.png`} />
+                            <span>{country.name}</span>
+                            {country.code === birthCountry && <Check aria-hidden="true" size={16} />}
+                          </button>
+                        ))}
+                        {!filteredCountries.length && <p className="country-menu__empty">No country found</p>}
+                      </div>
                     </div>
-                  </div>
+                  </>,
+                  document.body,
                 )}
               </div>
             </div>
