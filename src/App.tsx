@@ -2725,6 +2725,15 @@ function App() {
   }, []);
 
   useEffect(() => {
+    document.documentElement.classList.toggle("logo-intro-active", showIntro);
+    document.body.classList.toggle("logo-intro-active", showIntro);
+    return () => {
+      document.documentElement.classList.remove("logo-intro-active");
+      document.body.classList.remove("logo-intro-active");
+    };
+  }, [showIntro]);
+
+  useEffect(() => {
     if (showIntro || !window.location.hash) return;
     window.requestAnimationFrame(() =>
       document.querySelector(window.location.hash)?.scrollIntoView(),

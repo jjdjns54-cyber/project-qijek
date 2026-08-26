@@ -6217,13 +6217,21 @@ body {
 /* Treatment preview */
 .logo-intro {
   position: fixed;
-  z-index: 1000;
+  z-index: 2147483647;
   inset: 0;
+  width: 100dvw;
+  height: 100dvh;
   display: grid;
   place-items: center;
+  isolation: isolate;
   background: #f8fbff;
   animation: logoIntroExit 360ms 1.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-  pointer-events: none;
+  pointer-events: auto;
+}
+
+html.logo-intro-active,
+body.logo-intro-active {
+  overflow: hidden !important;
 }
 .logo-intro__mark {
   display: flex;
