@@ -26,6 +26,26 @@ const countries = countryCodes
   .map((code) => ({ code, name: countryNames.of(code) ?? code }))
   .sort((a, b) => a.name.localeCompare(b.name));
 
+function CountryFlag({ code }: { code: string }) {
+  const [loaded, setLoaded] = useState(false);
+  const [failed, setFailed] = useState(false);
+
+  return (
+    <span className={`country-flag ${loaded ? "is-loaded" : ""}`} aria-hidden="true">
+      <span>{code}</span>
+      {!failed && (
+        <img
+          alt=""
+          loading="eager"
+          src={`https://flagcdn.com/w40/${code.toLocaleLowerCase()}.png`}
+          onLoad={() => setLoaded(true)}
+          onError={() => setFailed(true)}
+        />
+      )}
+    </span>
+  );
+}
+
 function detectCountry() {
   const zone = Intl.DateTimeFormat().resolvedOptions().timeZone;
   const timezoneCountry: Record<string, string> = {
@@ -161,7 +181,8 @@ export default function OnboardingPage() {
         birthCountry,
       }),
     );
-    window.location.assign("/scan");
+    sessionStorage.removeItem("doodee:authenticated");
+    window.location.assign("/login");
   };
 
   return (
@@ -469,7 +490,7 @@ export default function OnboardingPage() {
                 >
                   {selectedCountry ? (
                     <span className="country-picker__value">
-                      <img alt="" src={`https://flagcdn.com/w40/${selectedCountry.code.toLocaleLowerCase()}.png`} />
+                      <CountryFlag key={selectedCountry.code} code={selectedCountry.code} />
                       {selectedCountry.name}
                     </span>
                   ) : <span className="country-picker__placeholder">Select country</span>}
@@ -514,7 +535,7 @@ export default function OnboardingPage() {
                               setIsCountryOpen(false);
                             }}
                           >
-                            <img alt="" loading="lazy" src={`https://flagcdn.com/w40/${country.code.toLocaleLowerCase()}.png`} />
+                            <CountryFlag code={country.code} />
                             <span>{country.name}</span>
                             {country.code === birthCountry && <Check aria-hidden="true" size={16} />}
                           </button>

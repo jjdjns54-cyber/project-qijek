@@ -117,7 +117,7 @@ export default function ScanPage() {
     stopCamera();
     if (navigationTimerRef.current) window.clearTimeout(navigationTimerRef.current);
     try {
-      window.sessionStorage.setItem("doodee:last-scan-front", "/assets/sample-face-front.png");
+      window.sessionStorage.setItem("doodee:last-scan-front", "/assets/sample-face-front.webp");
       window.sessionStorage.setItem("doodee:scan-skipped", "1");
     } catch {}
     window.location.assign("/app?demo=1#overview");

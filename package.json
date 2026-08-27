@@ -4,7 +4,9 @@
   "version": "1.0.0",
   "type": "module",
   "scripts": {
+    "predev": "node scripts/generate-asset-manifest.mjs",
     "dev": "vite",
+    "prebuild": "node scripts/generate-asset-manifest.mjs",
     "build": "tsc -b && vite build",
     "preview": "vite preview",
     "test:scan": "node --test --experimental-strip-types tests/scanQuality.test.ts"

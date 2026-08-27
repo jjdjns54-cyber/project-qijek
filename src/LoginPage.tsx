@@ -31,13 +31,14 @@ export default function LoginPage() {
   const continueWithGoogle = () => {
     if (googleBusy) return;
     setGoogleBusy(true);
-    window.setTimeout(() => window.location.assign("/onboarding"), 1500);
+    window.sessionStorage.setItem("doodee:authenticated", "1");
+    window.setTimeout(() => window.location.assign("/scan"), 1500);
   };
 
   return (
     <main className="login-page">
       {googleBusy && (
-        <div className="login-transition" role="status" aria-live="assertive" aria-label="Preparing your onboarding">
+        <div className="login-transition" role="status" aria-live="assertive" aria-label="Signing you in">
           <div className="login-transition__logo" aria-hidden="true">
             <LoaderCircle className="login-transition__spinner" strokeWidth={1} />
             <Brand href="/" />

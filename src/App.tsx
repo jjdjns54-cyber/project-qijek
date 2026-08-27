@@ -1,9 +1,5 @@
 import { Fragment, useEffect, useMemo, useRef, useState } from "react";
-import {
-  FaceLandmarker,
-  FilesetResolver,
-  type NormalizedLandmark,
-} from "@mediapipe/tasks-vision";
+import type { FaceLandmarker, NormalizedLandmark } from "@mediapipe/tasks-vision";
 import { siteCopy, type Locale, type Market } from "./localization";
 import Brand from "./Brand";
 import {
@@ -1330,15 +1326,18 @@ function Button({
 
 const LANDMARK_WIDTH = 1086;
 const LANDMARK_HEIGHT = 1448;
-const SAMPLE_FACE_SRC = "/assets/sample-face-front.png";
+const SAMPLE_FACE_SRC = "/assets/sample-face-front.webp";
 const HAIRLINE_EXTENSION = 0.75;
 let faceLandmarkerPromise: Promise<FaceLandmarker> | null = null;
+let faceLandmarkLips: { start: number; end: number }[] = [];
 
 function getFaceLandmarker() {
-  faceLandmarkerPromise ??= FilesetResolver.forVisionTasks(
-    "https://cdn.jsdelivr.net/npm/@mediapipe/tasks-vision@1.0.1/wasm",
-  ).then((vision) =>
-    FaceLandmarker.createFromOptions(vision, {
+  faceLandmarkerPromise ??= import("@mediapipe/tasks-vision").then(async ({ FaceLandmarker, FilesetResolver }) => {
+    faceLandmarkLips = FaceLandmarker.FACE_LANDMARKS_LIPS;
+    const vision = await FilesetResolver.forVisionTasks(
+      "https://cdn.jsdelivr.net/npm/@mediapipe/tasks-vision@1.0.1/wasm",
+    );
+    return FaceLandmarker.createFromOptions(vision, {
       baseOptions: {
         modelAssetPath:
           "https://storage.googleapis.com/mediapipe-models/face_landmarker/face_landmarker/float16/latest/face_landmarker.task",
@@ -1347,8 +1346,8 @@ function getFaceLandmarker() {
       minFaceDetectionConfidence: 0.7,
       minFacePresenceConfidence: 0.7,
       minTrackingConfidence: 0.7,
-    }),
-  );
+    });
+  });
   return faceLandmarkerPromise;
 }
 
@@ -1676,7 +1675,7 @@ function FaceGuide({
   } else {
     shapes = (
       <>
-        {connections(FaceLandmarker.FACE_LANDMARKS_LIPS, "lips")}
+        {connections(faceLandmarkLips, "lips")}
         {line(61, 291, "mouth-width")}
         {line(98, 327, "nose-width")}
       </>
@@ -1788,6 +1787,8 @@ function ProductPreview({ locale }: { locale: Locale }) {
             key={SAMPLE_FACE_SRC}
             ref={imageRef}
             src={SAMPLE_FACE_SRC}
+            loading="lazy"
+            decoding="async"
             alt={
               locale === "th"
                 ? `ภาพตัวอย่างสำหรับวัด${displayMetric(activeMetric).label}`
@@ -1971,6 +1972,8 @@ function TreatmentPreview({ locale }: { locale: Locale }) {
           <img
             className="treatment-comparison__before"
             src="/assets/treatment-preview-face.png"
+            loading="lazy"
+            decoding="async"
             alt="Original treatment preview portrait"
           />
           <div
@@ -2662,7 +2665,7 @@ function ClinicBusinessFlow({ locale }: { locale: Locale }) {
 }
 
 function App() {
-  const [showIntro, setShowIntro] = useState(true);
+  const showIntro = false;
   const [menuOpen, setMenuOpen] = useState(false);
   const [openFaq, setOpenFaq] = useState<number | null>(null);
   const [headerCompact, setHeaderCompact] = useState(false);
@@ -2712,17 +2715,6 @@ function App() {
     localStorage.setItem("doodee_language", nextLocale);
     document.cookie = `doodee_locale=${nextLocale}; Path=/; Max-Age=31536000; SameSite=Lax`;
   };
-
-  useEffect(() => {
-    const reducedMotion = window.matchMedia(
-      "(prefers-reduced-motion: reduce)",
-    ).matches;
-    const timeout = window.setTimeout(
-      () => setShowIntro(false),
-      reducedMotion ? 80 : 1750,
-    );
-    return () => window.clearTimeout(timeout);
-  }, []);
 
   useEffect(() => {
     document.documentElement.classList.toggle("logo-intro-active", showIntro);
@@ -2911,7 +2903,7 @@ function App() {
               </a>
             ))}
             <div className="mobile-nav-actions">
-              <Button href="/login">{copy.start}</Button>
+              <Button href="/onboarding">{copy.start}</Button>
             </div>
           </nav>
           <div className="locale-switch header-locale" aria-label="Language">
@@ -2949,7 +2941,7 @@ function App() {
                 EN
               </button>
             </div>
-            <Button href="/login">{copy.start}</Button>
+            <Button href="/onboarding">{copy.start}</Button>
           </div>
           <button
             className="menu-toggle"
@@ -2964,16 +2956,18 @@ function App() {
 
         <img
           className="landing-science-art landing-science-art--dna"
-          src="/assets/science/dna-glass-v1.png"
+          src="/assets/science/dna-glass-v1.webp"
           alt=""
           aria-hidden="true"
+          fetchPriority="high"
           decoding="async"
         />
         <img
           className="static-luxury-art static-luxury-art--ring"
-          src="/assets/science/optical-ring-v1.png"
+          src="/assets/science/optical-ring-v1.webp"
           alt=""
           aria-hidden="true"
+          fetchPriority="high"
           decoding="async"
         />
 
@@ -2996,7 +2990,7 @@ function App() {
               <div className="accent-line" />
               <p>{copy.heroBody}</p>
               <div className="hero-actions">
-                <Button href="/login">{copy.start}</Button>
+                <Button href="/onboarding">{copy.start}</Button>
                 <Button ghost href="#product">
                   {copy.sample}
                 </Button>
@@ -3147,7 +3141,7 @@ function App() {
                 </li>
               ))}
             </ul>
-            <Button ghost href="/login">{copy.startFree}</Button>
+            <Button ghost href="/onboarding">{copy.startFree}</Button>
           </article>
           <article
             className="plan-featured"
@@ -3171,7 +3165,7 @@ function App() {
                 </li>
               ))}
             </ul>
-            <Button href="/login">{copy.startMonthly}</Button>
+            <Button href="/onboarding">{copy.startMonthly}</Button>
           </article>
         </div>
       </section>
@@ -3227,7 +3221,7 @@ function App() {
           <span>{copy.forYou}</span>
           <h2>{copy.userCtaTitle}</h2>
           <p>{copy.userCtaBody}</p>
-          <Button href="/login">{copy.start}</Button>
+          <Button href="/onboarding">{copy.start}</Button>
         </article>
         <article>
           <span>{copy.forClinics}</span>

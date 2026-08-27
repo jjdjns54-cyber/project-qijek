@@ -670,12 +670,12 @@ function getStoredScan() {
     return (
       window.sessionStorage.getItem("doodee:last-scan-front") ||
       (new URLSearchParams(window.location.search).has("demo")
-        ? "/assets/sample-face-front.png"
+        ? "/assets/sample-face-front.webp"
         : null)
     );
   } catch {
     return new URLSearchParams(window.location.search).has("demo")
-      ? "/assets/sample-face-front.png"
+      ? "/assets/sample-face-front.webp"
       : null;
   }
 }
@@ -1584,13 +1584,22 @@ function Analysis({
         <InsightList kind="improve" items={improvements} />
       </section>
       <GlassCard className="continue-analysis">
-        <div className="continue-analysis__letters">
-          <span className="is-done">H</span>
-          <span>A</span>
-          <span>D</span>
-          <span>F</span>
-        </div>
-        <div>
+        <nav className="continue-analysis__journey" aria-label="Analysis progress">
+          {pillars.map((item, index) => (
+            <button
+              key={item.id}
+              type="button"
+              className={`${item.id === "harmony" ? "is-done" : ""} ${pillar === item.id ? "is-current" : ""}`}
+              onClick={() => setPillar(item.id)}
+              aria-current={pillar === item.id ? "step" : undefined}
+            >
+              <span>{item.label.charAt(0)}</span>
+              <strong>{item.label}</strong>
+              {index < pillars.length - 1 && <i aria-hidden="true" />}
+            </button>
+          ))}
+        </nav>
+        <div className="continue-analysis__copy">
           <span className="eyebrow">Progress</span>
           <h2>1 of 4 pillars analyzed</h2>
           <p>Explore each pillar for a fuller view of your face.</p>

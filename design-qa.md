@@ -1,54 +1,52 @@
 # Design QA
 
-## Evidence
-
-- Reference: `C:\Users\manuz\AppData\Local\Temp\codex-clipboard-108dcb9b-d957-4242-8f64-01496ee84257.png`
+- Source visual truth: `C:\Users\manuz\.codex\generated_images\019ff29d-7715-7351-9548-71cd825ac87e\exec-373786fd-9c05-43d0-b791-03d0458b09be.png`
 - Implementation: `http://127.0.0.1:4317/app?demo=1#analysis`
-- Metric library: `C:\Users\manuz\AppData\Local\Temp\doodee-metric-library.png`
-- Premium paywall: `C:\Users\manuz\AppData\Local\Temp\doodee-premium-paywall.png`
-- State: Analysis, free plan, All 102 library and locked premium state.
+- Desktop screenshot: `output/progress-option2-desktop.png`
+- Mobile screenshot: `output/progress-option2-mobile.png`
+- Combined comparison: `output/progress-option2-comparison.png`
+- Desktop viewport: 1594 x 900 CSS px, device scale factor 1
+- Mobile viewport override: 390 x 844 CSS px; rendered client width 375 px; device scale factor 1
+- Source pixels: 2086 x 754; compared crop 2002 x 205
+- Implementation pixels: 1594 x 900; compared crop 1248 x 153
+- State: Analysis, Harmony analyzed, progress strip visible
 
-## Full-view comparison
+## Full-view comparison evidence
 
-- Retains the reference structure: sidebar, top navigation, pillar navigation, face panel, results surface and progressive locks.
-- Uses DOODEE ice-blue glass surfaces, near-black actions and higher image emphasis instead of copying competitor branding.
-- Adds the requested measurement library without mixing treatment preview into Analysis.
-- Desktop and mobile stay inside the viewport without document-width overflow.
+The final implementation preserves the selected connected four-stage journey, the H/Harmony active blue state, the vertical divider, progress hierarchy, three glass actions, ice-blue surface, and compact single-row desktop composition. The component is proportionally narrower because it lives inside the existing dashboard content column.
 
-## Functional coverage
+## Focused region comparison evidence
 
-- 102 measurable checks across 8 categories.
-- 57 normalized 2D landmark ratios.
-- 31 measurements that must wait for a known scale before showing millimetres.
-- 14 projected ratios and angles from side or oblique captures.
-- Visual-estimate, skin and grooming checks are removed from the analysis library.
-- Search, category filters, method filters and metric-detail disclosure.
-- Every metric exposes capture requirements and a limitation instead of presenting fabricated precision.
+`output/progress-option2-comparison.png` contains the normalized source and implementation component crops. No additional focused region was needed because the component copy, control states, connectors, radius, and action alignment are legible in this comparison.
 
-## Paywall
+## Required fidelity surfaces
 
-- DOODEE Complete: `$19.99 / month`.
-- Locked pillars now open through a 1.05-second `Unlocking…` state before the offer appears.
-- The transition uses a themed glass face-scan visual, moving scan line, spinner and progress indicator.
-- Closing and reopening the paywall resets the animation correctly.
-- Lists all 102 checks, confidence and limitations, monthly plan, previews and consultation report.
-- Free analysis remains available.
-- States that the product is educational, not a diagnosis or a measure of human worth.
-
-## Verification
-
-- `npm run build`: passed.
-- Browser DOM: meaningful content, 102-check library and one semantic paywall dialog.
-- Search and side-profile filtering: passed.
-- Desktop width: 1365 px; document width: 1365 px.
-- Mobile width: 390 px; no horizontal document overflow in the recorded verification pass.
-- Browser console: no warnings or errors in the recorded verification pass.
-- Unlock transition, offer transition, generated asset load, close control and repeat-open flow: passed.
+- Fonts and typography: existing Manrope stack retained; hierarchy, weights, letter spacing, wrapping, and optical scale match the source intent.
+- Spacing and layout rhythm: four equal journey stages, consistent 38 px controls, 22 px card radius, aligned progress block, and bottom actions match the selected composition.
+- Colors and visual tokens: existing DOODEE ice-blue glass, cool gray, near-black, and #087BFF active state retained.
+- Image quality and assets: the selected component contains no raster imagery or non-standard icons; no placeholder or approximate asset was introduced.
+- Copy and content: Harmony, Angularity, Dimorphism, Features and all progress/action copy match the selected design.
 
 ## Findings
 
-- No P0, P1 or P2 issue remains in the implemented scope.
-- P3: the production checkout still needs the billing provider connection.
-- P3: calibrated millimetres must remain locked until a known scale reference exists.
+No actionable P0, P1, or P2 differences remain.
+
+## Comparison history
+
+1. Initial comparison found a P2 focus-state mismatch: the browser default outline surrounded the selected journey control.
+2. Fixed by suppressing the default button outline while retaining a clear custom keyboard-focus treatment on the letter control.
+3. Reloaded and recaptured the initial state. The final comparison has no unintended focus ring and matches the source hierarchy.
+
+## Interaction and responsive checks
+
+- H, A, D, and F journey controls switch the active analysis pillar.
+- Explore Angularity, Explore Dimorphism, and Explore Features all switch to the intended pillar.
+- No browser console errors or warnings.
+- Mobile document width equals client width; no horizontal overflow.
+- Mobile layout becomes a readable 2 x 2 journey with full pillar names and stacked actions.
+
+## Follow-up polish
+
+- P3: desktop spacing is slightly denser than the standalone mock because of the existing sidebar and content width.
 
 final result: passed
