@@ -4,7 +4,7 @@ import { waitForAssets } from "./assetReadiness";
 type GateState = "loading" | "exiting" | "ready";
 
 const imageCache = new Map<string, Promise<void>>();
-const LOADER_DURATION_MS = 800;
+const LOADER_DURATION_MS = 560;
 const EXIT_DURATION_MS = 260;
 
 const routeAssets = {

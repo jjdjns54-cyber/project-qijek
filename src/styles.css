@@ -1648,20 +1648,6 @@ body:has(.doodee-app),
   animation: unlockScan 920ms cubic-bezier(.4,0,.2,1) both;
 }
 
-.unlock-loading__landmarks {
-  width: 142px;
-  height: 196px;
-  position: absolute;
-  z-index: 2;
-  top: 28px;
-  left: 50%;
-  border: 1px solid rgba(35,134,229,.42);
-  border-radius: 48% 48% 44% 44%;
-  transform: translateX(-50%);
-  opacity: 0;
-  animation: unlockLandmarks 520ms 320ms cubic-bezier(.16,1,.3,1) forwards;
-}
-
 .unlock-loading__pill {
   min-height: 38px;
   padding: 0 16px;
@@ -1788,11 +1774,6 @@ body:has(.doodee-app),
 @keyframes unlockFocus {
   from { filter: saturate(.5) contrast(.92) blur(4px); transform: scale(1.08); }
   to { filter: saturate(.78) contrast(1.03) blur(0); transform: scale(1.035); }
-}
-
-@keyframes unlockLandmarks {
-  from { opacity: 0; transform: translateX(-50%) scale(.94); }
-  to { opacity: 1; transform: translateX(-50%) scale(1); }
 }
 
 @keyframes unlockProgress {
